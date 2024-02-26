@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:wght@800|Raleway:wght@100;300;400;600;800|Press+Start+2P&display=swap');
+
+* { box-sizing: border-box; padding: 0px; margin: 0px; font-family: 'Raleway', sans-serif; }
+html, body { height: 100%; width: 100%; }
+a { text-decoration: none !important; }
+button { font-family: 'Press Start 2P', cursive !important; }
+.outer-wrapper { position: fixed !important; width: 100%; height: 100%; z-index: 1000; }
+.outer-container { width: 100%; height: 100%; }
+
+/*font family*/
+.font-fam-1 { font-family: 'Raleway', sans-serif !important; }
+.font-fam-2 { font-family: 'Roboto', sans-serif !important; }
+.font-fam-3 { font-family: 'Press Start 2P', cursive !important; }
+
+/*font size*/
+.text-xs { font-size: 13px !important; }
+.text-s { font-size: 16px !important; }
+.text-m { font-size: 24px !important; }
+.text-ml { font-size: 30px !important; }
+.text-l { font-size: 35px !important; }
+.text-xl { font-size: 45px !important; }
+
+.blockchain-block { min-width: 200px; max-width: 250px; height: 300px; margin-left: auto; margin-right: auto; margin-bottom: 15px; background-color: rgb(104, 231, 189); padding: 10px; }
+.blockchain-block-body { display: flex; flex-direction: column; justify-content: space-between; border: 0.1px solid #777; background-color: #fff; height: 90%; }
+.blockchain-block-content { padding: 5px; border-bottom: 0.1px solid #777; }
+.blockchain-block-content:last-child { border: none; }
+.blockchain-block-data { max-height: 90px; overflow-y: scroll; line-height: 1.2;}
+.terminal { height: 300px; background-color: #333; color: #28a745; }
