@@ -3,7 +3,6 @@
 * { box-sizing: border-box; padding: 0px; margin: 0px; font-family: 'Raleway', sans-serif; }
 html, body { height: 100%; width: 100%; }
 a { text-decoration: none !important; }
-button { font-family: 'Press Start 2P', cursive !important; }
 .outer-wrapper { position: fixed !important; width: 100%; height: 100%; z-index: 1000; }
 .outer-container { width: 100%; height: 100%; }
 
@@ -13,16 +12,16 @@ button { font-family: 'Press Start 2P', cursive !important; }
 .font-fam-3 { font-family: 'Press Start 2P', cursive !important; }
 
 /*font size*/
-.text-xs { font-size: 13px !important; }
+.text-xs { font-size: 12px !important; }
 .text-s { font-size: 16px !important; }
 .text-m { font-size: 24px !important; }
 .text-ml { font-size: 30px !important; }
 .text-l { font-size: 35px !important; }
 .text-xl { font-size: 45px !important; }
 
-.blockchain-block { min-width: 200px; max-width: 250px; height: 300px; margin-left: auto; margin-right: auto; margin-bottom: 15px; background-color: rgb(104, 231, 189); padding: 10px; }
-.blockchain-block-body { display: flex; flex-direction: column; justify-content: space-between; border: 0.1px solid #777; background-color: #fff; height: 90%; }
-.blockchain-block-content { padding: 5px; border-bottom: 0.1px solid #777; }
+.blockchain-block { min-width: 250px; max-width: 300px; height: 360px; margin-left: auto; margin-right: auto; margin-bottom: 15px; background-color: rgb(104, 231, 189); padding: 10px; }
+.blockchain-block-body { display: flex; flex-direction: column; justify-content: space-around; border: 0.1px solid #777; background-color: #fff; height: 90%; }
+.blockchain-block-content { padding: 1px 5px; border-bottom: 0.1px solid #777; max-height: 150px; min-height: 20px; overflow-y: scroll; overflow-x: hidden; margin: 0px; }
 .blockchain-block-content:last-child { border: none; }
-.blockchain-block-data { max-height: 90px; overflow-y: scroll; line-height: 1.2;}
-.terminal { height: 300px; background-color: #333; color: #28a745; }
+.blockchain-block-data { width: 100%; line-height: 1.2; }
+.terminal { height: 360px; background-color: #333; color: #28a745; }

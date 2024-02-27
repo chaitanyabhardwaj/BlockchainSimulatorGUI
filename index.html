@@ -18,6 +18,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./scripts/blockchainsimulator.js"></script>
+    <script>
+        'use strict';
+        $(document).ready(() => {
+            const blockchainSimulator = new BlockchainSimulator();
+        });
+    </script>
 </head><body>
     <div class="outer-wrapper d-none"></div>
     <div class="outer-container">
@@ -30,19 +37,20 @@
                                 <div class="blockchain-block-body">
                                     <div class="blockchain-block-content">
                                         Index id: <span class="blockchain-block-id">0</span><br>
-                                        Nonce: <span class="blockchain-block-nonce">1355</span>
+                                        Nonce: <span class="blockchain-block-nonce">0</span>
                                     </div>
                                     <div class="blockchain-block-content">
-                                        Data: <span class="blockchain-block-data d-inline-block">I can write anything here! I can write anything here! I can write anything here! I can write anything here! I can write anything here! I can write anything here! I can write anything here! I can write anything here! I can write anything here! I can write anything here!</span>
+                                        Data:<br>
+                                        <span class="blockchain-block-data d-inline-block" contenteditable="true">Insert your data here.</span>
                                     </div>
                                     <div class="blockchain-block-content">
-                                        Prev Hash: #<span class="blockchain-block-prevhash">3j4n32kj4b2e</span><br>
-                                        Hash: #<span class="blockchain-block-hash">3j4n32kj4b2e</span><br>
-                                        Create at: <span class="blockchain-block-timestamp">09:00 AM</span>
+                                        Prev Hash: <span class="blockchain-block-prevhash">-</span><br>
+                                        Hash: <span class="blockchain-block-hash">-</span><br>
+                                        Create at: <span class="blockchain-block-timestamp">-</span>
                                     </div>
                                 </div>
                                 <div class="text-center mt-1">
-                                    <button class="btn btn-light font-fam-1 text-xs">Mine</button>
+                                    <button class="btn btn-light text-xs blockchain-block-mine">Mine <i class="fa fa-cog" aria-hidden="true"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +68,7 @@
                 </div>
             </div>
             <div class="mx-auto my-5 text-center">
-                <button class="btn btn-light">Fetch Blockchain</button>
+                <button class="btn btn-light">Fetch Blockchain <i class="fa fa-cogs" aria-hidden="true"></i></button>
             </div>
             <div class="w-100 bg-primary overflow-auto" style="height: 100px;">
             </div>
