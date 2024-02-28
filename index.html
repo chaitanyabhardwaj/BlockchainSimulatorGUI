@@ -28,50 +28,46 @@
 </head><body>
     <div class="outer-wrapper d-none"></div>
     <div class="outer-container">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-6">
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="blockchain-block card text-xs">
-                                <div class="blockchain-block-body">
-                                    <div class="blockchain-block-content">
-                                        Index id: <span class="blockchain-block-id">0</span><br>
-                                        Nonce: <span class="blockchain-block-nonce">0</span>
-                                    </div>
-                                    <div class="blockchain-block-content">
-                                        Data:<br>
-                                        <span class="blockchain-block-data d-inline-block" contenteditable="true">Insert your data here.</span>
-                                    </div>
-                                    <div class="blockchain-block-content">
-                                        Prev Hash: <span class="blockchain-block-prevhash">-</span><br>
-                                        Hash: <span class="blockchain-block-hash">-</span><br>
-                                        Create at: <span class="blockchain-block-timestamp">-</span>
-                                    </div>
-                                </div>
-                                <div class="text-center mt-1">
-                                    <button class="btn btn-light text-xs blockchain-block-mine">Mine <i class="fa fa-cog" aria-hidden="true"></i></button>
-                                </div>
+        <div class="header mb-1 bg-light p-3">
+            <h4 class="d-inline-block font-fam-2">Blockchain Simulator</h4>
+            <img src="https://raw.githubusercontent.com/chaitanyabhardwaj/chaitanyabhardwaj.github.io/97d5722b9e650f557a4ce7e3a84b5098bb7ac200/resources/favicon.png" width="27" height="auto" style="vertical-align: top;">
+        </div>
+        <div class="container py-4">
+            <div class="justify-content-center">
+                <div class="w-100 d-flex blockchain-chain bg-light">
+                    <div class="blockchain-block card text-xs d-inline-block" data-block-id="-1" id="blockchain-block-inputblock">
+                        <div class="blockchain-block-body">
+                            <div class="blockchain-block-content">
+                                Index id: <span class="blockchain-block-id">-</span><br>
+                                Nonce: <span class="blockchain-block-nonce">-</span>
+                            </div>
+                            <div class="blockchain-block-content">
+                                Data:<br>
+                                <span class="blockchain-block-data d-inline-block" contenteditable="true">Insert your data here.</span>
+                            </div>
+                            <div class="blockchain-block-content">
+                                Prev Hash: <span class="blockchain-block-prevhash">-</span><br>
+                                Hash: <span class="blockchain-block-hash">-</span><br>
+                                Created at: <span class="blockchain-block-timestamp">-</span>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="blockchain-block card w-100">
-                                This is a Block
-                            </div>
+                        <div class="text-center mt-1">
+                            <button class="btn btn-light text-xs blockchain-block-mine" data-block-id="-1">Mine <i class="fa fa-cog" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="mx-auto my-4 text-center">
+                    <button class="btn btn-light">Fetch Blockchain <i class="fa fa-cogs" aria-hidden="true"></i></button>
+                </div>
+                <div class="">
                     <div class="card w-100 terminal">
                         This is terminal
                     </div>
                 </div>
             </div>
-            <div class="mx-auto my-5 text-center">
-                <button class="btn btn-light">Fetch Blockchain <i class="fa fa-cogs" aria-hidden="true"></i></button>
-            </div>
-            <div class="w-100 bg-primary overflow-auto" style="height: 100px;">
-            </div>
+        </div>
+        <div class="footer mt-1 bg-light p-3">
+            <a href="https://chaitanyabhardwaj.github.io" target="_blank" class="float-right">Created By <span style="color: rgb(32, 199, 198);">Chaitanya Bhardwaj</span></p>
         </div>
     </div>
 </body></html>

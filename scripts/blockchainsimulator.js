@@ -6,6 +6,30 @@ class BlockchainSimulator {
     constructor() {
         this.blockchainAPIContext = 'http://localhost:8103/blockchainsimulator/';
 
+        //constants
+        this.ATTR__DATA_BLOCK_ID = 'data-block-id';
+        this.ATTR_VAL__BLOCK_CLASSES = 'blockchain-block card text-xs d-inline-block';
+        this.ATTR_VAL__BLOCK_BODY_CLASSES = 'blockchain-block-body';
+        this.ATTR_VAL__BLOCK_CONTENT_CLASSES = 'blockchain-block-content';
+        this.ATTR_VAL__BLOCK_ID_CLASSES = 'blockchain-block-id';
+        this.ATTR_VAL__BLOCK_NONCE_CLASSES = 'blockchain-block-nonce';
+        this.ATTR_VAL__BLOCK_DATA_CLASSES = 'blockchain-block-data';
+        this.ATTR_VAL__BLOCK_PREV_HASH_CLASSES = 'blockchain-block-prevhash';
+        this.ATTR_VAL__BLOCK_ID_HASH_CLASSES = 'blockchain-block-hash';
+        this.ATTR_VAL__BLOCK_TIMESTAMP_CLASSES = 'blockchain-block-timestamp';
+        this.ATTR_VAL__BLOCK_MINE_CLASSES = 'blockchain-block-mine';
+        this.TXT__BLOCK_ID = 'Index id: ';
+        this.TXT__BLOCK_NONCE = 'Nonce: ';
+        this.TXT__BLOCK_DATA = 'Data: ';
+        this.TXT__BLOCK_PREV_HASH = 'Prev Hash: ';
+        this.TXT__BLOCK_HASH = 'Hash: ';
+        this.TXT__BLOCK_TIMESTAMP = 'Created at: ';
+        this.TXT__BLOCK_MINE = 'Mine';
+
+        //dom elements
+        this.inputBlock = $('#blockchain-block-inputblock');
+        this.blockChain = $('.blockchain-chain');
+        this.block = $('.blockchain-block');
         this.spanId = $('.blockchain-block-id');
         this.spanNonce = $('.blockchain-block-nonce');
         this.spanData = $('.blockchain-block-data');
@@ -14,15 +38,17 @@ class BlockchainSimulator {
         this.spanTimestamp = $('.blockchain-block-timestamp');
         this.btnMine = $('.blockchain-block-mine');
 
-        this.btnMine.click(() => {
+        this.btnMine.click(event => {
+            console.log('Gathering input data...');
+            let currBlockId = $(event.currentTarget).data('block-id');
+            let currBlock = this.block.filter("[data-block-id='" + currBlockId + "']");
+            let currNonce = currBlock.find('.blockchain-block-nonce');
+            let currData = currBlock.find('.blockchain-block-data');
+            let currPrevHash = currBlock.find('.blockchain-block-prevHash');
+            let currHash = currBlock.find('.blockchain-block-hash');
+            let currTimestamp = currBlock.find('.blockchain-block-timestamp');
             console.log('Start mining...');
-            if(this.blockInputValid()) {
-                console.log("Inputs are valid!");
-                this.mine(this.spanData.text());
-            }
-            else {
-                console.log("Inputs are not valid!");
-            }
+            this.mine(currData.text());
         });
     }
 
@@ -48,7 +74,7 @@ class BlockchainSimulator {
             return response.json();
         }).then(j => {
             console.log(j);
-            this.updateCurrentBlock(j.index, j.nonce, j.data, j.prevHash, j.hash, j.created_AT);
+            this.updateBlock(j.index, j.nonce, j.data, j.prevHash, j.hash, j.created_AT);
         }).catch(err => {
             console.error('There was a problem with the fetch operation:', err);
         });
@@ -62,25 +88,95 @@ class BlockchainSimulator {
 
     }
 
-    blockInputValid() {
-        if(this.spanId == undefined || this.spanNonce == undefined || this.spanData == undefined || 
-            this.spanPrevHash == undefined || this.spanHash == undefined || this.spanTimestamp == undefined)
-            return false;
-        let id = this.spanId.text();
-        let nonce = this.spanNonce.text();
-        let data = this.spanData.text();
-        let prevHash = this.spanPrevHash.text();
-        return !(id.length == 0 || id === '' || nonce.length == 0 || nonce === '' || data.length == 0 ||
-        data === '' || prevHash.length == 0 || prevHash === '');
+    createBlock(id,nonce, data, prevHash, hash, timestamp) {
+        console.log("Creating new block!");
+        //create new block
+        let newBlock = document.createElement('div');
+        newBlock.setAttribute('class', this.ATTR_VAL__BLOCK_CLASSES);
+        newBlock.setAttribute(this.ATTR__DATA_BLOCK_ID, id);
+
+        //create block body
+        let newBlockBody = document.createElement('div');
+        newBlockBody.setAttribute('class', this.ATTR_VAL__BLOCK_BODY_CLASSES);
+
+        //create block content 1
+        let newBlockContent1 = document.createElement('div');
+        newBlockContent1.setAttribute('class', this.ATTR_VAL__BLOCK_CONTENT_CLASSES);
+
+        //create block content 2
+        let newBlockContent2 = document.createElement('div');
+        newBlockContent2.setAttribute('class', this.ATTR_VAL__BLOCK_CONTENT_CLASSES);
+
+        //create block content 3
+        let newBlockContent3 = document.createElement('div');
+        newBlockContent3.setAttribute('class', this.ATTR_VAL__BLOCK_CONTENT_CLASSES);
+
+        //create block id span
+        let newBlockId = document.createElement('div');
+        newBlockId.setAttribute('class', this.ATTR_VAL__BLOCK_ID_CLASSES);
+
+        //create block id span
+        let newBlockNonce = document.createElement('div');
+        newBlockNonce.setAttribute('class', this.ATTR_VAL__BLOCK_NONCE_CLASSES);
+
+        //create block id span
+        let newBlockData = document.createElement('div');
+        newBlockData.setAttribute('class', this.ATTR_VAL__BLOCK_DATA_CLASSES);
+
+        //create block id span
+        let newBlockPrevHash = document.createElement('div');
+        newBlockPrevHash.setAttribute('class', this.ATTR_VAL__BLOCK_PREV_HASH_CLASSES);
+
+        //create block id span
+        let newBlockHash = document.createElement('div');
+        newBlockHash.setAttribute('class', this.ATTR_VAL__BLOCK_ID_HASH_CLASSES);
+
+        //create block id span
+        let newBlockTimestamp = document.createElement('div');
+        newBlockTimestamp.setAttribute('class', this.ATTR_VAL__BLOCK_TIMESTAMP_CLASSES);
+
+        //add before input block
+        this.blockChain.get(0).insertBefore(newBlock, this.inputBlock.get(0));
+        //add elements to block
+        newBlock.appendChild(newBlockBody);
+        //add elements to block body
+        newBlockBody.appendChild(newBlockContent1);
+        newBlockBody.appendChild(newBlockContent2);
+        newBlockBody.appendChild(newBlockContent3);
+
+        //add elements to block content
+        newBlockContent1.appendChild(newBlockId);
+        newBlockContent1.appendChild(newBlockNonce);
+        newBlockContent2.appendChild(newBlockData);
+        newBlockContent3.appendChild(newBlockPrevHash);
+        newBlockContent3.appendChild(newBlockHash);
+        newBlockContent3.appendChild(newBlockTimestamp);
+
+        //populate value in block fields
+        newBlockId.innerHTML = '<b>' + this.TXT__BLOCK_ID + '</b>' + id;
+        newBlockNonce.innerHTML = '<b>' + this.TXT__BLOCK_NONCE + '</b>' + nonce;
+        newBlockData.innerHTML = '<b>' + this.TXT__BLOCK_DATA + '</b>' + data;
+        newBlockPrevHash.innerHTML = '<b>' + this.TXT__BLOCK_PREV_HASH + '</b>' + prevHash;
+        newBlockHash.innerHTML = '<b>' + this.TXT__BLOCK_HASH + '</b>' + hash;
+        newBlockTimestamp.innerHTML = '<b>' + this.TXT__BLOCK_TIMESTAMP + '</b>' + timestamp;
     }
 
-    updateCurrentBlock(id, nonce, data, prevHash, hash, timestamp) {
-        this.spanId.text(id);
-        this.spanNonce.text(nonce);
-        this.spanData.text(data);
-        this.spanPrevHash.text(prevHash);
-        this.spanHash.text(hash);
-        this.spanTimestamp.text(timestamp);
+    updateBlock(id, nonce, data, prevHash, hash, timestamp) {
+        console.log("Finding block with id " + id + " to update.");
+        let currBlock = this.block.filter("[data-block-id='" + id + "']");
+        console.log(currBlock);
+        if(currBlock == undefined || currBlock == null || currBlock.length === 0) {
+            console.log("Can't find a block to update.");
+            this.createBlock(id,nonce, data, prevHash, hash, timestamp);
+        }
+        else {
+            console.log("Found block to update.");
+            let currNonce = currBlock.find('.blockchain-block-nonce');
+            let currData = currBlock.find('.blockchain-block-data');
+            let currPrevHash = currBlock.find('.blockchain-block-prevHash');
+            let currHash = currBlock.find('.blockchain-block-hash');
+            let currTimestamp = currBlock.find('.blockchain-block-timestamp');
+        }
     }
 
 }
