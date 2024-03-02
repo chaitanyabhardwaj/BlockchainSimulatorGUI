@@ -26,6 +26,8 @@ class BlockchainSimulator {
         this.TXT__BLOCK_TIMESTAMP = 'Created at: ';
         this.TXT__BLOCK_MINE = 'Mine';
 
+        this.callback = null;
+
         //dom elements
         this.inputBlock = $('#blockchain-block-inputblock');
         this.blockChain = $('.blockchain-chain');
@@ -72,12 +74,18 @@ class BlockchainSimulator {
             if(!response.ok)
                 throw new Error('Network response was not ok. Status code: ', response.status);
             return response.json();
-        }).then(j => {
-            console.log(j);
+        }).then(d => {
+            //console.log(d);
+            let j = d.block;
+            this.callback(d);
             this.updateBlock(j.index, j.nonce, j.data, j.prevHash, j.hash, j.created_AT);
         }).catch(err => {
             console.error('There was a problem with the fetch operation:', err);
         });
+    }
+
+    setListener(listener) {
+        this.callback = listener;
     }
 
     changeData(index, data) {

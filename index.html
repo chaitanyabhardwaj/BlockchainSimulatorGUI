@@ -21,8 +21,46 @@
     <script src="./scripts/blockchainsimulator.js"></script>
     <script>
         'use strict';
+
+        function MyApp() {
+            this.terminal = $('.terminal');
+            this.terminalHistory = '';
+        };
+
+        MyApp.prototype.typeIt = function(container, str, speed) {
+            let i = 0;
+            str = '\n' + str;
+            const interval = setInterval(() => {
+                if(str.charAt(i) === '\n' && i !== str.length - 1) {
+                    this.terminalHistory += '<br><span style="color: #93aea3"><b>&gt;</b></span><span style="color: #05779a"> ';
+                }
+                else if(str.charAt(i) === '$') {
+                    this.terminalHistory += '</span><span style="color: #93aea3"><b>:</b></span> ';
+                }
+                else this.terminalHistory += str.charAt(i);
+                container.html(this.terminalHistory);
+                i++;
+                if(i == str.length) {
+                    this.terminalHistory += '<br>'
+                    container.html(this.terminalHistory);
+                    clearInterval(interval);
+                }
+            }, speed);
+        };
+
+        MyApp.prototype.transcribe = function(command) {
+            this.typeIt(this.terminal, command, 5);
+        }
+
+        MyApp.prototype.onBlockDataReceived = function(data) {
+            console.log(data);
+            this.transcribe(data.logs);
+        }
+
         $(document).ready(() => {
             const blockchainSimulator = new BlockchainSimulator();
+            const myApp = new MyApp();
+            blockchainSimulator.setListener(myApp.onBlockDataReceived.bind(myApp));
         });
     </script>
 </head><body>
@@ -59,10 +97,8 @@
                 <div class="mx-auto my-4 text-center">
                     <button class="btn btn-light">Fetch Blockchain <i class="fa fa-cogs" aria-hidden="true"></i></button>
                 </div>
-                <div class="">
-                    <div class="card w-100 terminal">
-                        This is terminal
-                    </div>
+                <div class="w-100 terminal p-2 rounded">
+                    <span style="color: #93aea3"><b>&gt;</b></span>
                 </div>
             </div>
         </div>
