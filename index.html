@@ -32,10 +32,10 @@
             str = '\n' + str;
             const interval = setInterval(() => {
                 if(str.charAt(i) === '\n' && i !== str.length - 1) {
-                    this.terminalHistory += '<br><span style="color: #93aea3"><b>&gt;</b></span><span style="color: #05779a"> ';
+                    this.terminalHistory += `<br><span style="color: #93aea3;"><b>&gt;</b></span><span style="color: #05779a; font-family: 'Courier New', Courier, monospace !important;"> `;
                 }
                 else if(str.charAt(i) === '$') {
-                    this.terminalHistory += '</span><span style="color: #93aea3"><b>:</b></span> ';
+                    this.terminalHistory += '</span><span style="color: #93aea3;"><b>:</b></span> ';
                 }
                 else this.terminalHistory += str.charAt(i);
                 container.html(this.terminalHistory);
@@ -54,7 +54,12 @@
 
         MyApp.prototype.onBlockDataReceived = function(data) {
             console.log(data);
-            this.transcribe(data.logs);
+            if(Array.isArray(data)) {
+                this.transcribe("Fetching all blocks... $ Fetched successfully!");
+            }
+            else {
+                this.transcribe(data.logs);
+            }
         }
 
         $(document).ready(() => {
@@ -95,7 +100,7 @@
                     </div>
                 </div>
                 <div class="mx-auto my-4 text-center">
-                    <button class="btn btn-light">Fetch Blockchain <i class="fa fa-cogs" aria-hidden="true"></i></button>
+                    <button class="btn btn-light blockchain-getall">Fetch Blockchain <i class="fa fa-cogs" aria-hidden="true"></i></button>
                 </div>
                 <div class="w-100 terminal p-2 rounded">
                     <span style="color: #93aea3"><b>&gt;</b></span>

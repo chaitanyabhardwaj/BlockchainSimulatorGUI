@@ -39,6 +39,7 @@ class BlockchainSimulator {
         this.spanHash = $('.blockchain-block-hash');
         this.spanTimestamp = $('.blockchain-block-timestamp');
         this.btnMine = $('.blockchain-block-mine');
+        this.btnFetchBlockchain = $('.blockchain-getall');
 
         this.btnMine.click(event => {
             console.log('Gathering input data...');
@@ -52,6 +53,12 @@ class BlockchainSimulator {
             console.log('Start mining...');
             this.mine(currData.text());
         });
+
+        this.btnFetchBlockchain.click(() => {
+            this.clear();
+            this.getAll();
+        });
+
     }
 
     mine(data) {
@@ -67,7 +74,7 @@ class BlockchainSimulator {
             body: JSON.stringify(postData)
         };
         let mineURL = this.blockchainAPIContext + 'mine';
-        console.log("Sending request to Blockchain Simulator server...");
+        console.log("Sending /POST request to Blockchain Simulator server...");
         console.log(postData);
         fetch(mineURL, options).then(response => {
             console.log('Response:', response);
@@ -80,12 +87,8 @@ class BlockchainSimulator {
             this.callback(d);
             this.updateBlock(j.index, j.nonce, j.data, j.prevHash, j.hash, j.created_AT);
         }).catch(err => {
-            console.error('There was a problem with the fetch operation:', err);
+            console.error('There was a problem with the mine() fetch operation:', err);
         });
-    }
-
-    setListener(listener) {
-        this.callback = listener;
     }
 
     changeData(index, data) {
@@ -93,7 +96,40 @@ class BlockchainSimulator {
     }
 
     getAll() {
+        console.log("Get all blocks in the blockchain.");
+        let getAllURL = this.blockchainAPIContext + "getall";
+        console.log("Sending /GET requrest to Blockchain Simulator");
+        fetch(getAllURL, {method: 'GET'}).then(response => {
+            console.log('Response: ', response);
+            if(!response.ok)
+                throw new Error('Network response was not ok. Status code: ', response.status);
+            return response.json();
+        }).then(list => {
+            console.log(list);
+            this.callback(list);
+            for(let i = 0; i < list.length; i++)
+                this.updateBlock(list[i].index, list[i].nonce, list[i].data, list[i].prevHash, list[i].hash, list[i].created_AT);
+        }).catch(err => {
+            console.error('There was a problem with the getAll() fetch operation:', err);
+        });
+    }
 
+    clear() {
+        console.log("Clearing the blockchain from GUI");
+        this.blockChain.empty();
+        this.blockChain.append(this.inputBlock);
+        this.btnMine.click(event => {
+            console.log('Gathering input data...');
+            let currBlockId = $(event.currentTarget).data('block-id');
+            let currBlock = this.block.filter("[data-block-id='" + currBlockId + "']");
+            let currNonce = currBlock.find('.blockchain-block-nonce');
+            let currData = currBlock.find('.blockchain-block-data');
+            let currPrevHash = currBlock.find('.blockchain-block-prevHash');
+            let currHash = currBlock.find('.blockchain-block-hash');
+            let currTimestamp = currBlock.find('.blockchain-block-timestamp');
+            console.log('Start mining...');
+            this.mine(currData.text());
+        });
     }
 
     createBlock(id,nonce, data, prevHash, hash, timestamp) {
@@ -185,6 +221,10 @@ class BlockchainSimulator {
             let currHash = currBlock.find('.blockchain-block-hash');
             let currTimestamp = currBlock.find('.blockchain-block-timestamp');
         }
+    }
+
+    setListener(listener) {
+        this.callback = listener;
     }
 
 }
