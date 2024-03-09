@@ -19,7 +19,9 @@
 .text-xl { font-size: 45px !important; }
 
 .header { color: rgb(32, 199, 198); border-bottom: 0.2px solid #777; }
-.blockchain-block { min-width: 260px; width: 260px; height: 360px; background-color: rgb(104, 231, 189); padding: 10px; }
+.blockchain-block { min-width: 260px; width: 260px; height: 360px; background-color: rgb(177, 208, 208); padding: 10px; }
+.blockchain-block-valid { background-color: rgb(104, 231, 178) !important; }
+.blockchain-block-invalid { background-color: rgb(231, 104, 108) !important; }
 .blockchain-block-body { display: flex; flex-direction: column; justify-content: space-around; border: 0.1px solid #777; background-color: #fff; height: 90%; }
 .blockchain-block-content { padding: 1px 5px; border-bottom: 0.1px solid #777; max-height: 150px; min-height: 20px; overflow-y: scroll; overflow-x: hidden; margin: 0px; }
 .blockchain-block-content:last-child { border: none; }

@@ -49,7 +49,7 @@
         };
 
         MyApp.prototype.transcribe = function(command) {
-            this.typeIt(this.terminal, command, 5);
+            this.typeIt(this.terminal, command, 1);
         }
 
         MyApp.prototype.onBlockDataReceived = function(data) {
@@ -81,17 +81,17 @@
                     <div class="blockchain-block card text-xs d-inline-block" data-block-id="-1" id="blockchain-block-inputblock">
                         <div class="blockchain-block-body">
                             <div class="blockchain-block-content">
-                                Index id: <span class="blockchain-block-id">-</span><br>
-                                Nonce: <span class="blockchain-block-nonce">-</span>
+                                <b>Index id:</b> <span class="blockchain-block-id">-</span><br>
+                            <b>Nonce:</b> <span class="blockchain-block-nonce">-</span>
                             </div>
                             <div class="blockchain-block-content">
-                                Data:<br>
+                            <b>Data:</b><br>
                                 <span class="blockchain-block-data d-inline-block" contenteditable="true">Insert your data here.</span>
                             </div>
                             <div class="blockchain-block-content">
-                                Prev Hash: <span class="blockchain-block-prevhash">-</span><br>
-                                Hash: <span class="blockchain-block-hash">-</span><br>
-                                Created at: <span class="blockchain-block-timestamp">-</span>
+                            <b>Prev Hash:</b> <span class="blockchain-block-prevhash">-</span><br>
+                            <b>Hash:</b> <span class="blockchain-block-hash">-</span><br>
+                            <b>Created at:</b> <span class="blockchain-block-timestamp">-</span>
                             </div>
                         </div>
                         <div class="text-center mt-1">
